@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/notify.js"></script>
+    <link rel="stylesheet"
+           hre="/static/style.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        p {
+            margin-left: 20px;
+        }
+        .price {
+            font-family: "Arial Narrow";
+        }
+    </style>
+</head>
+<body>
+    <a href="/">На главную</a>
+    <h2>Product {{product.name}}</h2>
+    <p><i class="price">{{product.category}}</i></p>
+    <p class="price"><b>{{product.price}}</b></p>
+    <p>{{product.quantity}}</p>
+
+    <form action="/products/{{product.id}}" method="post">
+        <button id="delete" type="submit">Delete</button>
+    </form>
+
+    <script>
+        document.getElementById("delete").addEventListener(
+            "click",
+            function (event) {
+                $.ajax({
+                    url: "/products/{{product.id}}",
+                    method: "DELETE",
+                    success: function (data) {
+
+                        $.notify(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+                event.preventDefault();
+            },
+            true
+        )
+    </script>
+
+</body>
+</html>
