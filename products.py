@@ -1,4 +1,3 @@
-# http://bit.ly/2rzyWys
 import sqlite3
 
 connection = sqlite3.connect('store.db')
